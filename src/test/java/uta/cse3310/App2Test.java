@@ -38,8 +38,8 @@ public class App2Test
         // this tests just shows one move...
         // remember, this is "code", you can use functions
         // and loops in the test code
-
-        Game G = new Game ();
+        Stats stats = new Stats();
+        Game G = new Game (stats);
         UserEvent U = new UserEvent ();
         ServerEvent E = new ServerEvent ();
         G.GameId = 1;

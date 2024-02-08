@@ -5,9 +5,19 @@ public class Game {
     public PlayerType CurrentTurn;
     public PlayerType[] Button;
     public String[] Msg;
+    public String[] bottomMsg;
     public int GameId;
+    public Stats gameStats; 
 
-    Game() {
+    // public int xWin = 0; 
+    // public int oWin = 0; 
+    // public int draw = 0; 
+    // public int gamesPlayed = 0;
+    // public int concurentGames = 0;
+    
+
+    Game(Stats stats) {
+        gameStats = stats; 
         Button = new PlayerType[9];
         // initialize it
         for (int i = 0; i < Button.length; i++) {
@@ -19,12 +29,19 @@ public class Game {
         CurrentTurn = PlayerType.NOPLAYER;
         Msg[0] = "Waiting for other player to join";
         Msg[1] = "";
+
+        bottomMsg = new String[2];
+        // bottomMsg[0] = "Number of games played: " + gamesPlayed + "Number of concurent games" + concurentGames;
+        // bottomMsg[1] = "Number of games played: " + gamesPlayed + "Number of concurent games" + concurentGames;
     }
 
     public void StartGame() {
         // X player goes first. Because that is how it is.
         Msg[0] = "You are X. Your turn";
         Msg[1] = "You are O. Other players turn";
+        
+        bottomMsg[0] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw;
+        bottomMsg[1] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw;
         CurrentTurn = PlayerType.XPLAYER;
     }
 
@@ -102,15 +119,21 @@ public class Game {
                 Msg[0] = "You Win!";
                 Msg[1] = "You Lose!";
                 CurrentTurn = PlayerType.NOPLAYER;
+                gameStats.xWin++;
             } else if (CheckBoard(PlayerType.OPLAYER)) {
                 Msg[1] = "You Win!";
                 Msg[0] = "You Lose!";
+                gameStats.oWin++;
                 CurrentTurn = PlayerType.NOPLAYER;
             } else if (CheckDraw(U.PlayerIdx)) {
                 Msg[0] = "Draw";
                 Msg[1] = "Draw";
+                gameStats.draw++;
                 CurrentTurn = PlayerType.NOPLAYER;
             }
+            bottomMsg[0] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw;
+            bottomMsg[1] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw;
+            
         }
     }
 

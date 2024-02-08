@@ -62,6 +62,8 @@ public class App extends WebSocketServer {
   // All games currently underway on this server are stored in
   // the vector ActiveGames
   Vector<Game> ActiveGames = new Vector<Game>();
+  
+  Stats stats = new Stats();
 
   int GameId = 1;
 
@@ -95,7 +97,8 @@ public class App extends WebSocketServer {
 
     // No matches ? Create a new Game.
     if (G == null) {
-      G = new Game();
+      G = new Game(stats);
+      
       G.GameId = GameId;
       GameId++;
       // Add the first player

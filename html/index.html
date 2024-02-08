@@ -3,7 +3,6 @@
 </head>
 
 <label id="topMessage"></label>
-
 <table>
     <tr>
 
@@ -28,6 +27,9 @@
 
     </tr>
 </table>
+
+<!--displayes draw or winner of game -->
+<label id="bottomMessage"></label>
 
 <script>
     var idx = -1;
@@ -61,6 +63,7 @@
 
         console.log("Message received: " + msg);
         const obj = JSON.parse(msg);
+    
 
         if ('YouAre' in obj) {
             if (obj.YouAre == "XPLAYER") {
@@ -91,6 +94,7 @@
                 // the message line
                 document.getElementById("topMessage").innerHTML = obj.Msg[idx];
             }
+            document.getElementById("bottomMessage").innerHTML = obj.bottomMsg[idx];
         }
     }
 
