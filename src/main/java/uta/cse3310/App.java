@@ -139,11 +139,13 @@ public class App extends WebSocketServer {
     System.out.println(conn + " has closed");
     // Retrieve the game tied to the websocket connection
     Game G = conn.getAttachment();
-    G = null;
-    int v = stats.concurentGames;
-    if(v > 0){
-      stats.concurentGames--;
+    if(ActiveGames.contains(G)){
+      ActiveGames.remove(G); 
+        if(stats.concurentGames > 0) { 
+            stats.concurentGames--; 
+        }
     }
+    G = null;
   }
 
   @Override
