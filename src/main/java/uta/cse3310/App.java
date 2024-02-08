@@ -62,8 +62,9 @@ public class App extends WebSocketServer {
   // All games currently underway on this server are stored in
   // the vector ActiveGames
   Vector<Game> ActiveGames = new Vector<Game>();
-  
   Stats stats = new Stats();
+  //stats.concurentGames;
+  //stats.numberGames;
 
   int GameId = 1;
 
@@ -98,7 +99,8 @@ public class App extends WebSocketServer {
     // No matches ? Create a new Game.
     if (G == null) {
       G = new Game(stats);
-      
+      stats.concurentGames++;
+
       G.GameId = GameId;
       GameId++;
       // Add the first player
@@ -138,6 +140,10 @@ public class App extends WebSocketServer {
     // Retrieve the game tied to the websocket connection
     Game G = conn.getAttachment();
     G = null;
+    int v = stats.concurentGames;
+    if(v > 0){
+      stats.concurentGames--;
+    }
   }
 
   @Override

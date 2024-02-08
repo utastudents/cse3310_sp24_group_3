@@ -8,12 +8,6 @@ public class Game {
     public String[] bottomMsg;
     public int GameId;
     public Stats gameStats; 
-
-    // public int xWin = 0; 
-    // public int oWin = 0; 
-    // public int draw = 0; 
-    // public int gamesPlayed = 0;
-    // public int concurentGames = 0;
     
 
     Game(Stats stats) {
@@ -31,8 +25,8 @@ public class Game {
         Msg[1] = "";
 
         bottomMsg = new String[2];
-        // bottomMsg[0] = "Number of games played: " + gamesPlayed + "Number of concurent games" + concurentGames;
-        // bottomMsg[1] = "Number of games played: " + gamesPlayed + "Number of concurent games" + concurentGames;
+        bottomMsg[0] = "Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
+        bottomMsg[1] = "Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
     }
 
     public void StartGame() {
@@ -40,8 +34,8 @@ public class Game {
         Msg[0] = "You are X. Your turn";
         Msg[1] = "You are O. Other players turn";
         
-        bottomMsg[0] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw;
-        bottomMsg[1] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw;
+        bottomMsg[0] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw + " Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
+        bottomMsg[1] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw + " Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
         CurrentTurn = PlayerType.XPLAYER;
     }
 
@@ -118,21 +112,25 @@ public class Game {
             if (CheckBoard(PlayerType.XPLAYER)) {
                 Msg[0] = "You Win!";
                 Msg[1] = "You Lose!";
-                CurrentTurn = PlayerType.NOPLAYER;
                 gameStats.xWin++;
+                gameStats.numberGames++;
+                CurrentTurn = PlayerType.NOPLAYER;
             } else if (CheckBoard(PlayerType.OPLAYER)) {
                 Msg[1] = "You Win!";
                 Msg[0] = "You Lose!";
                 gameStats.oWin++;
+                gameStats.numberGames++;
                 CurrentTurn = PlayerType.NOPLAYER;
             } else if (CheckDraw(U.PlayerIdx)) {
                 Msg[0] = "Draw";
-                Msg[1] = "Draw";
+                Msg[1] = "Draw"; 
                 gameStats.draw++;
+                gameStats.numberGames++;               
                 CurrentTurn = PlayerType.NOPLAYER;
+                
             }
-            bottomMsg[0] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw;
-            bottomMsg[1] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw;
+            bottomMsg[0] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw + " Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
+            bottomMsg[1] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw + " Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
             
         }
     }
