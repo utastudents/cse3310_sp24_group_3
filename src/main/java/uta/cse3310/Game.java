@@ -2,7 +2,6 @@ package uta.cse3310;
 
 public class Game {
     public PlayerType Players;
-    public PlayerType CurrentTurn;
     public PlayerType[] Button;
     public String[] Msg;
     public String[] bottomMsg;
@@ -19,24 +18,19 @@ public class Game {
         }
 
         Msg = new String[2];
+        bottomMsg = new String[2];
         Players = PlayerType.XPLAYER;
         CurrentTurn = PlayerType.NOPLAYER;
         Msg[0] = "Waiting for other player to join";
         Msg[1] = "";
 
-        bottomMsg = new String[2];
-        bottomMsg[0] = "Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
-        bottomMsg[1] = "Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
+        
     }
-
+    //change all below to be modified for a word search game
     public void StartGame() {
-        // X player goes first. Because that is how it is.
+        // Change the words 
         Msg[0] = "You are X. Your turn";
         Msg[1] = "You are O. Other players turn";
-        
-        bottomMsg[0] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw + " Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
-        bottomMsg[1] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw + " Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
-        CurrentTurn = PlayerType.XPLAYER;
     }
 
     private boolean CheckLine(int i, int j, int k, PlayerType player) {
@@ -103,34 +97,8 @@ public class Game {
                     Msg[0] = "Other Players Move.";
                     Msg[1] = "Your Move.";
                 }
-            } else {
-                Msg[PlayerToIdx(U.PlayerIdx)] = "Not a legal move.";
-            }
+            }  
 
-            // Check for winners, losers, and a draw
-
-            if (CheckBoard(PlayerType.XPLAYER)) {
-                Msg[0] = "You Win!";
-                Msg[1] = "You Lose!";
-                gameStats.xWin++;
-                gameStats.numberGames++;
-                CurrentTurn = PlayerType.NOPLAYER;
-            } else if (CheckBoard(PlayerType.OPLAYER)) {
-                Msg[1] = "You Win!";
-                Msg[0] = "You Lose!";
-                gameStats.oWin++;
-                gameStats.numberGames++;
-                CurrentTurn = PlayerType.NOPLAYER;
-            } else if (CheckDraw(U.PlayerIdx)) {
-                Msg[0] = "Draw";
-                Msg[1] = "Draw"; 
-                gameStats.draw++;
-                gameStats.numberGames++;               
-                CurrentTurn = PlayerType.NOPLAYER;
-                
-            }
-            bottomMsg[0] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw + " Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
-            bottomMsg[1] = "Number of X wins: " + gameStats.xWin + " Number of O wins: " + gameStats.oWin + " Number of draws: " + gameStats.draw + " Number of games played: " + gameStats.numberGames + " Number of concurent games: " + gameStats.concurentGames;
             
         }
     }
