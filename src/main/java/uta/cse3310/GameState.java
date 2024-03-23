@@ -4,17 +4,46 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameState {
-    private int gameNumber;
-    private int numPlayers;
+    public PlayerType Players;
+    public int gameNumber;
+    public int numPlayers;
+    public int shotClock;
+    public int timer;
+    public String[] Msg;
+    public User
     private User[] users; 
 
-
-    public GameState(int gameNumber, int numPlayers, User[] users) {
+    GameState() {
         this.gameNumber = gameNumber;
         this.numPlayers = numPlayers;
         this.users = users;
+        Msg = new String[4];        
+        Msg[0] = "";
+              
+    }
+    public void StartGame() {
 
     }
+    public String[] calculateWinner(){
+
+    }
+
+    private boolean checkWinnerWord(List<String>, PlayerType player) {
+
+    }
+
+    private boolean CheckHorizontal(PlayerType player) {
+       
+    }
+
+    private boolean CheckVertical(PlayerType player) {
+        
+    }
+
+    private boolean CheckBoard(PlayerType player) {
+        
+    }
+
     public void endGame() {
     }
 
@@ -37,8 +66,5 @@ public class GameState {
     public void setUsers(User[] users) {
         this.users = users;
     }
-
-
-
 
 }
