@@ -5,16 +5,13 @@ public class User {
     private int hiScore;
     private int currentPoints;
 
-    public User() {
+    public String[] User() {
         // Constructor logic here
     }
 
     public void pickWord() {
     }
 
-    public void sendMessage() {
-
-    }
 
     public int joinGame() {
         

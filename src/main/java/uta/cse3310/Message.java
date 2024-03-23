@@ -2,8 +2,8 @@ package uta.cse3310;
 
 public class Message {
     private static Message head;
-    private String user;
-    private String message;
+    private String[] user;
+    private String[] message;
     private Message nextMessage;
 
     public Message(String user, String message) {
