@@ -9,10 +9,6 @@ public class GameBoard {
         letterGrid = new char[rows][columns];
     }
 
-    public void initializeBoard() {
-
-    }
-
     public void highlightWord() {
         // This method needs a return type and perhaps parameters to specify which word to highlight.
     }

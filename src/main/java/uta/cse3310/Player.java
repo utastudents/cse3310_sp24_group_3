@@ -9,18 +9,6 @@ public class Player {
         this.score = 0; 
     }
 
-    public void operation() {
-
-    }
-
-    public void operation1(int args) {
-        
-    }
-
-    public void operation2(int args, String args2) {
-        
-    }
-
     public String getName() {
         return name;
     }
