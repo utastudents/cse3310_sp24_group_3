@@ -1,44 +1,41 @@
 package uta.cse3310;
 
 public class UILobby {
-    public String[] words;
-    
-    
-    public void endGame(){
 
-    }
-    public void updateGameState(){
-
-    }
-    public void selectWordHighlight(){
-
-    }
-    public void displayScoreBoard(){
-
-    }
-    public int scoreUpdate(){
-
-    }
-    public String[] displayWords(){
-
-    }
-    public int displayClock(){
-
-    }
-    public displayShotClock(){
-
-    }
-    public void displayWinner(){
-
-    }
-    public int timer(){
-
-    }
-    public int getWords() {
-        return words;
+    public static String displayGameChat() {
+        return null;
     }
 
-    public void setWords(String[] words;) {
-        this.words = words;
+    public static String chatMessage() {
+        return null;
     }
+
+    public static int displayConccurentGame() {
+        return 0;
+    }
+
+    public static void fourPlayerButton() {
+
+    }   
+
+    public static void twoPlayerButton() {
+
+    }  
+
+    public static String getNickname() {
+
+        return null;
+    }
+
+
+    public static void readyButton() {
+
+    }
+
+    public static void displayLeaderboard() {
+
+    }
+
+
+
 }

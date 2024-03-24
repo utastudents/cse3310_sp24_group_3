@@ -5,8 +5,9 @@ public class Message {
     private String[] user;
     private String[] message;
     private Message nextMessage;
+  
 
-    public Message(String user, String message) {
+    public Message(String[] user, String[] message) { // Fix: Change the type of 'user' parameter from String to String[]
         this.user = user;
         this.message = message;
         this.nextMessage = null;
@@ -20,6 +21,13 @@ public class Message {
 
     }
 
+    public static void sendMessages() {
+
+    }
+    public String nextMessage() {
+
+        return null;
+    }        
     // getters and setters for user, massage
     public String getUser() {
         return user;

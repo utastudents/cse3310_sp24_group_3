@@ -1,55 +1,66 @@
 package uta.cse3310;
 
 public class UIgame {
-    private int totalGames;
+    // Attributes
+    private String[] words; // Assuming this is an array of strings
 
-    public UIgame() {
-        this.totalGames = 0;
+    // Constructor
+    public UIgame(String[] words) {
+        this.words = words;
     }
 
-    public void printGrid() {
+    // Methods
+    public void endGame() {
 
     }
 
-    public int getTotalGames() {
-        return totalGames;
-    }
-
-    public void setTotalGames() {
-        this.totalGames = totalGames;
-    }
-
-    public String[] printGrid(){
-
-    } 
-    public void endGame(){
+    public void updateGameState() {
 
     }
-    public void updateGameState(){
+
+    public void selectWordHighlight() {
 
     }
-    public void selectWordHighlight(){
+
+    public void displayScoreBoard() {
 
     }
-    public void displayLeaderboards(){
 
-    }
-    public int scoreUpdate(){
+    public int scoreUpdate() {
 
+        return 0;
     }
-    public String[] displayWords(){
 
-    } 
-    public intdisplayClock(){
+    public String displayWords() {
 
+        return "";
     }
-    public int displayShotClock(){
 
+    public int displayClock() {
+
+        return 0;
     }
-    public void displayWinner(){
-        
+
+    public int displayShotClock() {
+
+        return 0;
     }
-    public int timer(){
-        
+
+    public void displayWinner() {
+ 
+    }
+
+    public int timer() {
+
+        return 0;
+    }
+
+
+    public String[] getWords() {
+        return words;
+    }
+
+    public void setWords(String[] words) {
+        this.words = words;
     }
 }

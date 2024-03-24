@@ -17,6 +17,10 @@ public class GameBoard {
         return validWords.contains(word);
     }
 
+    public static void letterGrid() {
+        
+    }
+
     // Getters and Setters for letterGrid and validWords
     public char[][] getLetterGrid() {
         return letterGrid;

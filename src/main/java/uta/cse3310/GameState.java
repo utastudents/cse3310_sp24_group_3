@@ -1,59 +1,62 @@
 package uta.cse3310;
+import java.util.List;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameState {
-    public User users;
-    public int gameNumber;
-    public int numPlayers;
-    public int shotClock;
-    public int timer;
-    public String[] Msg;
-    public User
-    private User[] users; 
 
-    GameState() {
-        this.gameNumber = gameNumber;
+    private int numPlayers;
+    private int timer;
+    private int shotClock;
+    private String message;
+
+    // Constructors
+    public GameState(int numPlayers, int timer, int shotClock) {
         this.numPlayers = numPlayers;
-        this.users = users;
-        Msg = new String[4];        
-        Msg[0] = "";
-              
-    }
-    public void StartGame() {
-
-    }
-    public String[] calculateWinner(){
-
+        this.timer = timer;
+        this.shotClock = shotClock;
+        this.message = ""; // default message initialization
     }
 
-    private boolean checkWinnerWord(List<String>, User users) {
+    // Methods
+    public int getUserList(List<User> userList) {
+
+        return userList.size();
+    }
+
+    public void startGame() {
 
     }
 
-    private boolean CheckHorizontal(User users) {
-       
+    public int endGame() {
+
+        return 0;
     }
 
-    private boolean CheckVertical(User users) {
-        
+    public boolean checkWinnerWord() {
+
+        return false;
     }
 
-    private boolean CheckBoard(User users) {
-        
+    public boolean checkVertical() {
+
+        return false;
     }
 
-    public void endGame() {
+    public boolean checkHorizontal() {
+
+        return false;
     }
 
-    public int getGameNumber() {
-        return gameNumber;
+    public String calculateWinner() {
+
+        return "";
     }
 
-    public void setGameNumber(int gameNumber) {
-        this.gameNumber = gameNumber;
+
+    public int timer() {
+        return 0;
     }
+
 
     public int getNumPlayers() {
         return numPlayers;
@@ -63,8 +66,30 @@ public class GameState {
         this.numPlayers = numPlayers;
     }
 
-    public void setUsers(User[] users) {
-        this.users = users;
+    public int getTimer() {
+        return timer;
     }
+
+    public void setTimer(int timer) {
+        this.timer = timer;
+    }
+
+    public int getShotClock() {
+        return shotClock;
+    }
+
+    public void setShotClock(int shotClock) {
+        this.shotClock = shotClock;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+  
 
 }
