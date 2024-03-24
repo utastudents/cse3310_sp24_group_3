@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameState {
-    public PlayerType Players;
+    public User users;
     public int gameNumber;
     public int numPlayers;
     public int shotClock;
@@ -28,19 +28,19 @@ public class GameState {
 
     }
 
-    private boolean checkWinnerWord(List<String>, PlayerType player) {
+    private boolean checkWinnerWord(List<String>, User users) {
 
     }
 
-    private boolean CheckHorizontal(PlayerType player) {
+    private boolean CheckHorizontal(User users) {
        
     }
 
-    private boolean CheckVertical(PlayerType player) {
+    private boolean CheckVertical(User users) {
         
     }
 
-    private boolean CheckBoard(PlayerType player) {
+    private boolean CheckBoard(User users) {
         
     }
 
