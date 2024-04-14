@@ -13,6 +13,7 @@ public class WordBank {
 
     public String[] chooseWords(String[] wordlist) {
         this.wordlist = wordlist;
+        return wordlist;
     }    
 
 }

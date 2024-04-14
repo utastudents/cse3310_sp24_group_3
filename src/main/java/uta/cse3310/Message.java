@@ -2,12 +2,11 @@ package uta.cse3310;
 
 public class Message {
     private static Message head;
-    private String[] user;
-    private String[] message;
+    private String user;  
+    private String message;  
     private Message nextMessage;
-  
 
-    public Message(String[] user, String[] message) { // Fix: Change the type of 'user' parameter from String to String[]
+    public Message(String user, String message) { // Fix: Changed parameter types
         this.user = user;
         this.message = message;
         this.nextMessage = null;
@@ -22,16 +21,16 @@ public class Message {
     }
 
     public static void sendMessages() {
-
     }
-    public String nextMessage() {
 
-        return null;
-    }        
-    // getters and setters for user, massage
+    public Message getNextMessage() {
+        return nextMessage;
+    }
+
     public String getUser() {
         return user;
     }
+
     public void setUser(String user) {
         this.user = user;
     }
@@ -44,12 +43,6 @@ public class Message {
         this.message = message;
     }
 
-    // Optionally, if needed, a getter for the nextMessage
-    public Message getNextMessage() {
-        return nextMessage;
-    }
-    
-    // Static getter for the head of the list
     public static Message getHead() {
         return head;
     }

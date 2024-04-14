@@ -5,7 +5,7 @@ public class User {
     private int hiScore;
     private int currentPoints;
 
-    public String[] User() {
+    public User() {
         // Constructor logic here
     }
 
