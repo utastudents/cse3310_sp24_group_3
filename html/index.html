@@ -8,7 +8,7 @@
 </head>
 <label id="topMessage"></label>
 <body>
-    <h1>Word Search Game</h1> <!-- Title moved above the main container -->
+    <h1>Word Search Game</h1>
     <div class="main-container">
         <div id="game-lobby">
             <div class="left-side">
@@ -20,7 +20,6 @@
                 </div>
                 <div id="game-chat">
                     <h1>Game Chat</h1>
-                    <!-- Added message display area -->
                     <div id="message-display"></div>
                     <textarea id="chat-message" placeholder="Type Message"></textarea>
                     <button id="send-message">Send</button>
@@ -28,14 +27,9 @@
             </div>
             <div class="right-side">
                 <div id="leaderboard">
-                    <h2>Leaderboard</h2>
-                    <div>User 1 Max Score: <span id="user1-max-score">Loading...</span></div>
-                    <div>User 2 Max Score: <span id="user2-max-score">Loading...</span></div>
-                    <div>User 3 Max Score: <span id="user3-max-score">Loading...</span></div>
-                    <div>User 4 Max Score: <span id="user4-max-score">Loading...</span></div>
+                  <label id="bottomMessage"></label>
                 </div>
                 <div id="concurrent-games">
-                    <label>Concurrent Games: </label><span id="concurrent-games-number">Loading...</span>
                 </div>
             </div>
         </div>
@@ -43,15 +37,12 @@
     <div class="game-container">
         <div id="game-ui">
           <div id="scoreboard">
-            <!-- Scores will be inserted here by JavaScript -->
           </div>
           <div id="grid">
-            <!-- Grid cells will be inserted here by JavaScript -->
           </div>
           <div id="word-list-container">
             <div class="word-list-label">Word List</div>
             <ul id="word-list">
-              <!-- Word list will be inserted here by JavaScript -->
             </ul>
           </div>
         </div>
