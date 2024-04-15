@@ -7,14 +7,22 @@ public class User {
 
     public User() {
         // Constructor logic here
+        this.nickname = "Guest"; // default nick
+        this.hiScore = 0;
+        this.currentPoints = 0;
     }
 
-    public void pickWord() {
+    public void pickWord(WordBank bank) {
+        currentWord = bank.chooseWord();
+        if (currentWord != null) {
+            System.out.println(nickname + " has picked the word: " + currentWord);
+        } else {
+            System.out.println("No words available to pick.");
+        }
     }
 
 
     public int joinGame() {
-        
         return 0; 
     }
 
