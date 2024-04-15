@@ -8,6 +8,14 @@ public class GameBoard {
     public GameBoard(int rows, int columns) {
         letterGrid = new char[rows][columns];
     }
+    public void initializeGrid() {
+        // This method needs a return type and perhaps parameters to specify how to initialize the grid.
+        for(int i=0; i<letterGrid.length; i++){
+            for(int j = 0; i < letterGrid[i].length; j++){
+                letterGrid[i][j] = '-';
+            }
+        }
+    }
 
     public void highlightWord() {
         // This method needs a return type and perhaps parameters to specify which word to highlight.
