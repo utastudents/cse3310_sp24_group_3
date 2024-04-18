@@ -1,6 +1,5 @@
 package uta.cse3310;
 
-import java.util.Arrays;
 import java.util.List; 
 public class Leaderboard {
 

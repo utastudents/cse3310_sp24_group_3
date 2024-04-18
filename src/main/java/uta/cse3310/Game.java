@@ -1,38 +1,93 @@
 package uta.cse3310;
+import java.util.List;
+
 
 public class Game {
-    public PlayerType Players;
+    private char[][] letterGrid;
+    private List<String> validWords;
     public PlayerType[] Button;
-    public String[] Msg;
-    public String[] bottomMsg;
+    private int numPlayers;
+    private int timer;
+    private String message;
+    private List<User> userList;
     public int GameId;
-    public Stats gameStats; 
-    
 
-    Game(Stats stats) {
-        gameStats = stats; 
-        Button = new PlayerType[9];
-        // initialize it
-        for (int i = 0; i < Button.length; i++) {
-            Button[i] = PlayerType.NOPLAYER;
+    // Constructors
+    public Game(int rows, int columns, int numPlayers, int timer, int shotClock, List<User> userList, List<String> validWords) {
+        this.letterGrid = new char[rows][columns];
+        initializeGrid();
+        this.validWords = validWords;
+        this.numPlayers = numPlayers;
+        this.timer = timer;
+        this.userList = userList;
+        this.message = ""; // default message initialization
+    }
+
+    // Initialize the grid with a default character
+    private void initializeGrid() {
+        for (int i = 0; i < letterGrid.length; i++) {
+            for (int j = 0; j < letterGrid[i].length; j++) {
+                letterGrid[i][j] = '-';
+            }
         }
-
-        Msg = new String[2];
-        bottomMsg = new String[2];
-        Players = PlayerType.XPLAYER;
-        CurrentTurn = PlayerType.NOPLAYER;
-        Msg[0] = "Waiting for other player to join";
-        Msg[1] = "";
-
-        
-    }
-    //change all below to be modified for a word search game
-    public void StartGame() {
-        // Change the words 
-        Msg[0] = "You are X. Your turn";
-        Msg[1] = "You are O. Other players turn";
     }
 
+    // Start the game, ensuring minimum players are present
+    public void startGame() {
+        if (numPlayers >= 2) {
+            message = "Game Started";
+            // Additional logic to start timers, etc.
+        } else {
+            message = "Waiting for other players to join";
+        }
+    }
+
+    // End the game and calculate results
+    public int endGame() {
+        message = "Game Over";
+        return calculateScore();
+    }
+
+    // Placeholder methods for word checking
+    public boolean checkWinnerWord(String word) {
+        // This could be expanded to check if the word is correctly placed and valid
+        return validWords.contains(word);
+    }
+
+    // Determine the winner based on scores
+    public String calculateWinner() {
+        User winner = null;
+        int maxScore = 0;
+        for (User user : userList) {
+            if (user.getScore() > maxScore) {
+                maxScore = user.getScore();
+                winner = user;
+            }
+        }
+        return (winner != null && winner.getScore() > 0) ? winner.getNickname() : "No Winner";
+    }
+
+    // Calculate the total score of all players
+    public int calculateScore() {
+        int totalScore = 0;
+        for (User user : userList) {
+            totalScore += user.getScore();
+        }
+        return totalScore;
+    }
+
+    // Getters and Setters
+    public char[][] getLetterGrid() {
+        return letterGrid;
+    }
+
+    public List<String> getValidWords() {
+        return validWords;
+    }
+
+    public String message() {
+        return message;
+    }
     private boolean CheckLine(int i, int j, int k, PlayerType player) {
         return player == Button[i] && player == Button[j] && player == Button[k];
     }
@@ -53,61 +108,7 @@ public class Game {
         return CheckHorizontal(player) | CheckVertical(player) | CheckDiagonal(player);
     }
 
-    private boolean CheckDraw(PlayerType player) {
-        // how to check for a draw?
-        // Are all buttons are taken ?
-        int count = 0;
-        for (int i = 0; i < Button.length; i++) {
-            if (Button[i] == PlayerType.NOPLAYER) {
-                count = count + 1;
-            }
-        }
-
-        return count == 0;
-    }
-
-    // This function returns an index for each player
-    // It does not depend on the representation of Enums
-    public int PlayerToIdx(PlayerType P) {
-        int retval = 0;
-        if (P == PlayerType.XPLAYER) {
-            retval = 0;
-        } else {
-            retval = 1;
-        }
-        return retval;
-    }
-
-    public void Update(UserEvent U) {
-        System.out.println("The user event is " + U.PlayerIdx + "  " + U.Button);
-
-        if ((CurrentTurn == U.PlayerIdx) && (CurrentTurn == PlayerType.OPLAYER || CurrentTurn == PlayerType.XPLAYER)) {
-            // Move is legitimate, lets do what was requested
-
-            // Is the button not taken by X or O?
-            if (Button[U.Button] == PlayerType.NOPLAYER) {
-                System.out.println("the button was 0, setting it to" + U.PlayerIdx);
-                Button[U.Button] = U.PlayerIdx;
-                if (U.PlayerIdx == PlayerType.OPLAYER) {
-                    CurrentTurn = PlayerType.XPLAYER;
-                    Msg[1] = "Other Players Move.";
-                    Msg[0] = "Your Move.";
-                } else {
-                    CurrentTurn = PlayerType.OPLAYER;
-                    Msg[0] = "Other Players Move.";
-                    Msg[1] = "Your Move.";
-                }
-            }  
-
-            
-        }
-    }
-
-    public void Tick() {
-        // this function can be called periodically if a
-        // timer is needed.
+    public void clock(){
 
     }
 }
-// In windows, shift-alt-F formats the source code
-// In linux, it is ctrl-shift-I
