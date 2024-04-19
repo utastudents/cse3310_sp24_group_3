@@ -15,7 +15,7 @@ public class Game {
     public Stats gameStats; 
 
     // Constructors
-    public Game(Stats stats) {
+    Game(Stats stats) {
         
     }
 
@@ -29,7 +29,7 @@ public class Game {
     }
 
     // Start the game, ensuring minimum players are present
-    public void startGame() {
+    public void StartGame() {
         if (numPlayers >= 2) {
             message = "Game Started";
             // Additional logic to start timers, etc.
@@ -106,5 +106,9 @@ public class Game {
 
     public void clock(){
 
+    }
+
+    public void Update(UserEvent U) {
+        System.out.println("The user event is " + U.PlayerIdx + "  " + U.Button);
     }
 }
