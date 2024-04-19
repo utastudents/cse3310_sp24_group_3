@@ -11,16 +11,12 @@ public class Game {
     private String message;
     private List<User> userList;
     public int GameId;
+    public PlayerType Players;
+    public Stats gameStats; 
 
     // Constructors
-    public Game(int rows, int columns, int numPlayers, int timer, int shotClock, List<User> userList, List<String> validWords) {
-        this.letterGrid = new char[rows][columns];
-        initializeGrid();
-        this.validWords = validWords;
-        this.numPlayers = numPlayers;
-        this.timer = timer;
-        this.userList = userList;
-        this.message = ""; // default message initialization
+    public Game(Stats stats) {
+        
     }
 
     // Initialize the grid with a default character
