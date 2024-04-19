@@ -43,17 +43,17 @@ public class App2Test
         UserEvent U = new UserEvent ();
         ServerEvent E = new ServerEvent ();
         G.GameId = 1;
-        G.Players = uta.cse3310.PlayerType.OPLAYER;
+        G.Players = uta.cse3310.PlayerType.player2;
         G.StartGame();
 
 
         // send an event 
         U.GameId = 1;
         U.Button = 1;
-        U.PlayerIdx =  uta.cse3310.PlayerType.XPLAYER;
+        U.PlayerIdx =  uta.cse3310.PlayerType.player1;
         G.Update (U);
 
-        assertTrue ( G.Button[1] == uta.cse3310.PlayerType.XPLAYER);
+        assertTrue ( G.Button[1] == uta.cse3310.PlayerType.player1);
 
 
 
