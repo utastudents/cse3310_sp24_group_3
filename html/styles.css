@@ -120,11 +120,14 @@ button:hover {
 }
   
 #grid {
-    grid-area: grid;
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-gap: 2px;
-}
+    display: grid;  
+    padding: 10px;
+    grid-gap: 5px; 
+  }
+  
+  #grid table {
+    border-collapse: collapse;  /* Ensures that the borders of the table are neatly displayed */
+  }
   
 .grid-cell {
     border: 1px solid #000;
