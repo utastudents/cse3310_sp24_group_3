@@ -26,41 +26,31 @@ joinButton.addEventListener('click', function() {
 });
 
 function createGrid() {
-  gridContainer.innerHTML = '';
+  const gridContainer = document.getElementById('grid');
+  gridContainer.innerHTML = ''; // Clear existing grid if any
+  let number = 1; // Button identifier
 
-  const buttonTable = document.createElement('table');
-  var number = 1; 
-  let rows = 25;
-  let columns = 25;
-  for (let i = 0; i < rows; i++) {
-    const row = buttonTable.insertRow();
-
-    for (let j = 0; j < columns; j++) {
-      const cell = row.insertCell();
-      const button = document.createElement('button');
-      
-      button.textContent = ''; 
-      button.id = 'button' + number; 
-
-      cell.appendChild(button);
-
-      number++;
-    }
+  for (let i = 0; i < 50; i++) {
+      for (let j = 0; j < 50; j++) {
+          const button = document.createElement('button');
+          button.id = 'button' + number;
+          button.textContent = ''; 
+          button.style.width = '20px'; 
+          button.style.height = '20px'; 
+          button.addEventListener('click', () => buttonClick(number));
+          gridContainer.appendChild(button);
+          number++;
+      }
   }
-  gridContainer.appendChild(buttonTable);
 }
 
 
-
-function buttonclick(i) {
-  U = new UserEvent();
-  U.Button = i;
-  if (idx == 0)
-      U.PlayerIdx = "XPLAYER";
-  else
-      U.PlayerIdx = "OPLAYER";
-  U.GameId = gameid;
+function buttonClick(buttonId) {
+  const button = document.getElementById('button' + buttonId);
+  const U = { Button: buttonId, PlayerIdx: 'SomePlayer', GameId: 'SomeGameId' }; 
   connection.send(JSON.stringify(U));
-  console.log(JSON.stringify(U))
+  console.log('Sent:', JSON.stringify(U));
+
+  button.style.backgroundColor = 'red'; 
 }
 

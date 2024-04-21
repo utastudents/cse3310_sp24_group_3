@@ -124,9 +124,9 @@ button:hover {
     padding: 10px;
     grid-gap: 5px; 
   }
-  
+
   #grid table {
-    border-collapse: collapse;  /* Ensures that the borders of the table are neatly displayed */
+    border-collapse: collapse;  
   }
   
 .grid-cell {
