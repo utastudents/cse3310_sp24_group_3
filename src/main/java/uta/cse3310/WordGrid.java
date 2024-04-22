@@ -7,16 +7,18 @@ public class WordGrid {
     public User user;
     public int rows = 25;
     public int columns = 25;
+    private int numWords = 15;
 
-    public String[] wordsCreated(){
-        int numWords = 10; 
+    public String[] wordsCreated(){ 
         String filePath = "words.txt";
+
         words = WordBank.generateRandomWords(numWords, filePath);
+
         return words;
     }
     
-    public String[][] createGrid(){
-        String[][] grid = new String[rows][columns];
+    public char[][] createGrid(){
+        char[][] grid = new char[rows][columns];
 
         Random random = new Random();
         for(int i = 0; i < rows; i++){
@@ -28,41 +30,91 @@ public class WordGrid {
         return grid;
     }
 
+    public int[][] createAnswer() {
+        int[][] answer = new int[rows][columns];
+        return answer;
+    }
 
-    public void placeWord(String[][] grid, String word) {
+
+    public void placeWord(char[][] grid, String[] word, int[][] answer) {
         Random rand = new Random();
         int len = word.length();
-        boolean placed = false;
 
-        while (!placed) {
+        for (String i: word) {
             // Randomly choose a direction: 0 = Horizontal, 1 = Vertical, 2 = Diagonal
-            int direction = rand.nextInt(3);
+            int direction = rand.nextInt(5);
             int startRow, startCol;
 
             switch (direction) {
                 case 0: // Horizontal
                     startRow = rand.nextInt(rows);
-                    startCol = rand.nextInt(columns - len + 1); // Adjust for word length
-                    for (int i = 0; i < len; i++) {
-                        grid[startRow][startCol + i] = String.valueOf(word.charAt(i));
+                    startCol = rand.nextInt(columns-len+1); // Adjust for word length
+
+                    // Placing characters in word grid
+                    for (int j = 0; j < len; j++) {
+                        grid[startRow][startCol + j] = String.valueOf(word.charAt(j));
                     }
-                    placed = true;
+
+                    // placing answers in answer grid
+                    answer[startRow][startCol] = i;
+                    answer[startRow][startCol+len-1] = i;
+
                     break;
+
                 case 1: // Vertical
                     startRow = rand.nextInt(rows - len + 1); // Adjust for word length
                     startCol = rand.nextInt(columns);
-                    for (int i = 0; i < len; i++) {
-                        grid[startRow + i][startCol] = String.valueOf(word.charAt(i));
+
+                    for (int j = 0; j < len; j++) {
+                        grid[startRow + j][startCol] = String.valueOf(word.charAt(j));
                     }
-                    placed = true;
+
+                    // placing answers in answer grid
+                    answer[startRow][startCol] = i;
+                    answer[startRow+len-1][startCol] = i;
+
                     break;
-                case 2: // Diagonal
+
+                case 2: // Reverse Vertical
+                    startRow = rand.nextInt(rows - len + 1); // Adjust for word length
+                    startCol = rand.nextInt(columns);
+
+                    for (int j = len-1; j >= 0; j--) {
+                        grid[startRow + j][startCol] = String.valueOf(word.charAt(j));
+                    }
+
+                    // placing answers in answer grid
+                    answer[startRow][startCol] = i;
+                    answer[startRow+len-1][startCol] = i;
+
+                    break;
+
+                case 3: // Diagonal
                     startRow = rand.nextInt(rows - len + 1); // Adjust for word length
                     startCol = rand.nextInt(columns - len + 1); // Adjust for word length
-                    for (int i = 0; i < len; i++) {
-                        grid[startRow + i][startCol + i] = String.valueOf(word.charAt(i));
+
+                    for (int j = 0; j < len; j++) {
+                        grid[startRow + j][startCol + j] = String.valueOf(word.charAt(j));
                     }
-                    placed = true;
+
+                    // placing answers in answer grid
+                    answer[startRow][startCol] = i;
+                    answer[startRow+len-1][startCol+len-1] = i;
+                    
+                    break;
+
+                case 4: // Other Diagonal
+                    startRow = rand.nextInt(rows - len + 1) + len - 1; // Adjust for word length
+                    startCol = rand.nextInt(columns - len + 1); // Adjust for word length
+
+                    for (int j = 0; j < len; j++) {
+                        grid[startRow - j][startCol + j] = String.valueOf(word.charAt(j));
+                    }
+
+                    // placing answers in answer grid
+                    answer[startRow][startCol] = i;
+                    answer[startRow-len+1][startCol+len-1] = i;
+                    
                     break;
             }
         }

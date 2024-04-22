@@ -13,19 +13,20 @@ public class Game {
     private String message;
     private List<User> userList;
     public int GameId;
-    private List<String> validWords;
+    private String[] validWords;
+    private wordGrid grid;
+
     // Constructors
     Game(Stats stats) {
         
     }
     // Start the game, ensuring minimum players are present
     public void StartGame() {
-        if (numPlayers >= 2) {
-            message = "Game Started";
-            // Additional logic to start timers, etc.
-        } else {
-            message = "Waiting for other players to join";
-        }
+
+    }
+
+    public void gridCreation() {
+        letterGrid = grid.createGrid();   
     }
 
     public void Update(UserEvent U) {
