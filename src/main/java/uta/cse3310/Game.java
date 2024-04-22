@@ -30,7 +30,6 @@ public class Game {
         {
             Msg[0] = user.getNickname();  
         }
-
     }
 
     public void gridCreation() {
