@@ -1,11 +1,6 @@
 const joinButton = document.getElementById('join-button');
 const gameLobby = document.getElementById('game-lobby');
 const gameUI = document.querySelector('.game-container');
-
-const nicknameInput = document.getElementById('nickname');
-const messageDisplay = document.getElementById('message-display');
-const chatMessage = document.getElementById('chat-message');
-const sendMessageButton = document.getElementById('send-message');
 // Create a connection to the server using WebSocket
 
 var connection = null;
@@ -54,6 +49,24 @@ joinButton.addEventListener('click', function() {
   };
 });
 
+function createGrid() {
+  const gridContainer = document.getElementById('grid');
+  gridContainer.innerHTML = ''; // Clear existing grid if any
+  let number = 1; // Button identifier
+
+  for (let i = 0; i < 50; i++) {
+      for (let j = 0; j < 50; j++) {
+          const button = document.createElement('button');
+          button.id = 'button' + number;
+          button.textContent = ''; 
+          button.style.width = '20px'; 
+          button.style.height = '20px'; 
+          button.addEventListener('click', () => buttonClick(number));
+          gridContainer.appendChild(button);
+          number++;
+      }
+  }
+}
 
 
 
