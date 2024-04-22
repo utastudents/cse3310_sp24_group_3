@@ -3,41 +3,41 @@
     margin: 20px auto; 
     width: 80%; 
     background-color: #fff; 
-}
-
-/* Game Lobby */
-body {
+  }
+  
+  /* Game Lobby */
+  body {
     font-family: Arial, sans-serif;
-}
-
-#game-lobby {
+  }
+  
+  #game-lobby {
     border: 2px solid #000; 
     display: flex;
     justify-content: space-between;
-}
-
-.left-side, .right-side {
+  }
+  
+  .left-side, .right-side {
     flex: 1;
     padding: 20px;
-}
-
-h1 {
+  }
+  
+  h1 {
     text-align: center;
     font-size: 24px;
-}
-
-#join-game, #game-chat, #leaderboard, #concurrent-games {
+  }
+  
+  #join-game, #game-chat, #leaderboard, #concurrent-games {
     margin-bottom: 20px;
-}
-
-input[type=text], textarea {
+  }
+  
+  input[type=text], textarea {
     width: calc(100% - 22px);
     padding: 10px;
     margin-top: 5px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-}
-#message-display {
+  }
+  #message-display {
   background-color: #f9f9f9; /* Light grey background */
   border: 1px solid #ddd; /* Light grey border */
   padding: 10px;
@@ -45,140 +45,123 @@ input[type=text], textarea {
   height: 150px; /* Fixed height */
   overflow-y: auto; /* Enables scroll if content overflows */
   font-family: 'Arial', sans-serif; /* Optional: Sets the font */
-}
-
-/* Style individual messages */
-.message {
-  padding: 5px;
-  margin: 5px 0;
-  border-radius: 4px;
-  background-color: #e7f4e7; /* A light green background */
-  border-left: 3px solid #5cb85c; /* A green left border */
-  display: block; /* Messages are block-level for clean line breaks */
-}
-
-/* Style the message input area */
-#chat-message {
-  width: calc(100% - 20px); /* Take up full container width minus padding */
-  padding: 10px;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-/* Style the send button */
-#send-message {
+  }
+  
+  
+  /* Style the send button */
+  #send-message {
   padding: 10px 20px;
-  background-color: #5cb85c; /* Green background */
+  background-color: hsl(347, 83%, 5%); /* Green background */
   color: white; /* White text */
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-
-
-
-button {
+  }
+  
+  
+  
+  button {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
     cursor: pointer;
     background-color: #f2f2f2;
     border: 1px solid #ccc;
-}
-
-button:hover {
+  }
+  
+  button:hover {
     background-color: #e7e7e7;
-}
-
-#leaderboard {
+  }
+  
+  #leaderboard {
     text-align: left;
     margin-top: 20px;
-}
-
-#leaderboard h2 {
+  }
+  
+  #leaderboard h2 {
     margin-bottom: 10px;
-}
-
-#game-chat {
+  }
+  
+  #game-chat {
     margin-top: 20px;
-}
-
-#send-message {
+  }
+  
+  #send-message {
     width: auto;
     float: right;
     margin-right: 0;
-}
-
-#concurrent-games {
+  }
+  
+  #concurrent-games {
     text-align: left;
-}
-
-
-#game-chat:after {
+  }
+  
+  
+  #game-chat:after {
     content: "";
     display: table;
     clear: both;
-}
-
-/* Game UI */
-
+  }
   
-.game-container {
+  /* Game UI */
+  
+  
+  .game-container {
     border: 1px solid #000;
     padding: 1vw;
     background-color: #fff;
     width: 80vw; 
     max-width: 1000px; /* Maximum width of the container */
     margin: 2vh auto;
-}
+  }
   
-#game-ui {
+  #game-ui {
     display: grid;
     grid-template-areas:
       'scoreboard grid word-list';
     grid-template-columns: 1fr 2fr 1fr;
     gap: 1vw;
     align-items: start;
-}
+  }
   
-#scoreboard, #word-list-container {
+  #scoreboard, #word-list-container {
     padding: 1vw;
-}
+  }
   
-.score {
+  .score {
     margin-bottom: 1vh;
-}
+  }
   
-#grid {
+  #grid {
     display: grid;  
     padding: 10px;
     grid-gap: 5px; 
   }
-
+  
   #grid table {
     border-collapse: collapse;  
   }
   
-.grid-cell {
+  .grid-cell {
     border: 1px solid #000;
     aspect-ratio: 1 / 1;
-}
+  }
   
-#word-list-container {
+  #word-list-container {
     grid-area: word-list;
-}
+  }
   
   
-#word-list {
+  #word-list {
     list-style-type: none;
     padding-left: 0;
-}
+  }
   
-#word-list li {
+  #word-list li {
     margin-bottom: 1vh;
-}
+  }
   
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     .game-container {
       width: 95vw;
       padding: 3vw;
@@ -186,5 +169,5 @@ button:hover {
     .game-title {
       font-size: 4vw;
     }
-}
+  }
   

@@ -1,7 +1,7 @@
-const joinButton = document.getElementById('join-button');
-const nicknameInput = document.getElementById('nickname');
 const gameLobby = document.getElementById('game-lobby');
 const gameUI = document.querySelector('.game-container');
+const nicknameInput = document.getElementById('nickname');
+
 // Create a connection to the server using WebSocket
 
 var connection = null;
@@ -20,19 +20,29 @@ connection.onclose = function (evt) {
 
 gameUI.style.display = 'none';
 
-joinButton.addEventListener('click', function() {
-  const nickname = nicknameInput.value;
-  if (nickname) {
-      const data = { type: 'join', nickname: nickname };
-      connection.send(JSON.stringify(data));
-  } else {
-      alert("Please enter a nickname");
-  }
-});
 
 
+function twoPlayer()
+{
 
+}
 
+function fourPlayer()
+{
 
+}
 
+function playersPlaying()
+{
 
+}
+
+function sendMessage()
+{
+
+}
+
+function makeGrid()
+{
+
+}
