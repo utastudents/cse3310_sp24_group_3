@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Game {
     private char[][] letterGrid;
+    private int[][] answerGrid;
+
     public PlayerType[] Button;
     public PlayerType Players;
     public Stats gameStats; 
@@ -26,13 +28,16 @@ public class Game {
     }
 
     public void gridCreation() {
-        letterGrid = grid.createGrid();   
+        letterGrid = grid.createGrid(); 
+        answerGrid = answer.createAnswer();  
     }
 
     public void Update(UserEvent U) {
         System.out.println("The user event is " + U.PlayerIdx + "  " + U.Button);
     }
 
+    /*      Methods not needed because they are replaced with checkWinnerWord()
+    
     private boolean CheckLine(int i, int j, int k, PlayerType player) {
         return player == Button[i] && player == Button[j] && player == Button[k];
     }
@@ -52,6 +57,7 @@ public class Game {
     private boolean CheckBoard(PlayerType player) {
         return CheckHorizontal(player) | CheckVertical(player) | CheckDiagonal(player);
     }
+    */
 
     // End the game and calculate results
     public int endGame() {
@@ -65,10 +71,16 @@ public class Game {
         }
         return validWords;
     }
-    // Placeholder methods for word checking
-    public boolean checkWinnerWord(String word) {
-        // This could be expanded to check if the word is correctly placed and valid
-        return validWords.contains(word);
+
+    // Method that checks if the user input matches a word in the answer grid.
+    // Takes 2 end coordinates that the user selects.
+    // If the index at both coordinates match in the answer grid, the word selected was right
+    // and hte function returns true, false of not.
+    public boolean checkWinnerWord(int row1, int col1, int row2, int col2) {
+        if ((answerGrid[row1][col1] != 0) && (answerGrid[row2][col2] != 0))
+            return true;
+        else
+            return false;
     }
 
     // Determine the winner based on scores

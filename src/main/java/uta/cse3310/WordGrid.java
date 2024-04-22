@@ -36,14 +36,15 @@ public class WordGrid {
     }
 
 
+    // Method that places a random word in a random place in the word grid. 
+    // It also places when the answers are in the answer grid.
     public void placeWord(char[][] grid, String[] word, int[][] answer) {
         Random rand = new Random();
-        int len = word.length();
 
         for (String i: word) {
-            // Randomly choose a direction: 0 = Horizontal, 1 = Vertical, 2 = Diagonal
             int direction = rand.nextInt(5);
             int startRow, startCol;
+            int len = word[i].length();
 
             switch (direction) {
                 case 0: // Horizontal
@@ -52,12 +53,12 @@ public class WordGrid {
 
                     // Placing characters in word grid
                     for (int j = 0; j < len; j++) {
-                        grid[startRow][startCol + j] = String.valueOf(word.charAt(j));
+                        grid[startRow][startCol + j] = String.valueOf(word[i].charAt(j));
                     }
 
                     // placing answers in answer grid
-                    answer[startRow][startCol] = i;
-                    answer[startRow][startCol+len-1] = i;
+                    answer[startRow][startCol] = i+1;
+                    answer[startRow][startCol+len-1] = i+1;
 
                     break;
 
@@ -66,12 +67,12 @@ public class WordGrid {
                     startCol = rand.nextInt(columns);
 
                     for (int j = 0; j < len; j++) {
-                        grid[startRow + j][startCol] = String.valueOf(word.charAt(j));
+                        grid[startRow + j][startCol] = String.valueOf(word[i].charAt(j));
                     }
 
                     // placing answers in answer grid
-                    answer[startRow][startCol] = i;
-                    answer[startRow+len-1][startCol] = i;
+                    answer[startRow][startCol] = i+1;
+                    answer[startRow+len-1][startCol] = i+1;
 
                     break;
 
@@ -80,12 +81,12 @@ public class WordGrid {
                     startCol = rand.nextInt(columns);
 
                     for (int j = len-1; j >= 0; j--) {
-                        grid[startRow + j][startCol] = String.valueOf(word.charAt(j));
+                        grid[startRow + j][startCol] = String.valueOf(word[i].charAt(j));
                     }
 
                     // placing answers in answer grid
-                    answer[startRow][startCol] = i;
-                    answer[startRow+len-1][startCol] = i;
+                    answer[startRow][startCol] = i+1;
+                    answer[startRow+len-1][startCol] = i+1;
 
                     break;
 
@@ -94,12 +95,12 @@ public class WordGrid {
                     startCol = rand.nextInt(columns - len + 1); // Adjust for word length
 
                     for (int j = 0; j < len; j++) {
-                        grid[startRow + j][startCol + j] = String.valueOf(word.charAt(j));
+                        grid[startRow + j][startCol + j] = String.valueOf(word[i].charAt(j));
                     }
 
                     // placing answers in answer grid
-                    answer[startRow][startCol] = i;
-                    answer[startRow+len-1][startCol+len-1] = i;
+                    answer[startRow][startCol] = i+1;
+                    answer[startRow+len-1][startCol+len-1] = i+1;
                     
                     break;
 
@@ -108,12 +109,12 @@ public class WordGrid {
                     startCol = rand.nextInt(columns - len + 1); // Adjust for word length
 
                     for (int j = 0; j < len; j++) {
-                        grid[startRow - j][startCol + j] = String.valueOf(word.charAt(j));
+                        grid[startRow - j][startCol + j] = String.valueOf(word[i].charAt(j));
                     }
 
                     // placing answers in answer grid
-                    answer[startRow][startCol] = i;
-                    answer[startRow-len+1][startCol+len-1] = i;
+                    answer[startRow][startCol] = i+1;
+                    answer[startRow-len+1][startCol+len-1] = i+1;
                     
                     break;
             }
