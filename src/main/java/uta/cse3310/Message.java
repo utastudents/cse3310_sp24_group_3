@@ -6,21 +6,37 @@ public class Message {
     private String message;  
     private Message nextMessage;
 
-    public Message(String user, String message) { // Fix: Changed parameter types
+    public Message(String user, String message) {
         this.user = user;
         this.message = message;
         this.nextMessage = null;
     }
 
-    public static void addMessage() {
-
+    public static void addMessage(String user, String message) {
+        Message newMessage = new Message(user, message);
+        if (head == null) {
+            head = newMessage;
+        } else {
+            Message temp = head;
+            while (temp.nextMessage != null) {
+                temp = temp.getNextMessage();
+            }
+            temp.nextMessage = newMessage;
+        }
     }
 
     public static void removeMessage() {
-
+        if (head != null) {
+            head = head.getNextMessage();
+        }
     }
 
     public static void sendMessages() {
+        Message current = head;
+        while (current != null) {
+            System.out.println(current.getUser() + ": " + current.getMessage());
+            current = current.getNextMessage();
+        }
     }
 
     public Message getNextMessage() {
