@@ -1,58 +1,43 @@
 package uta.cse3310;
 
+import java.util.*;
 public class User {
-    private String nickname;
-    private int hiScore;
-    private int currentPoints;
+    String nickname;
+    int score;
+    int id;
+    ArrayList<User> nickList;
 
-    public User() {
-        // Constructor logic here
-        this.nickname = "Guest"; // default nick
-        this.hiScore = 0;
-        this.currentPoints = 0;
+    public User(ArrayList<User> nickList, String nickname){
+        setNickname(nickList, nickname);
+        if(!userVerfiy(nickList, nickname)){
+            this.nickname = null;
+        }
     }
 
-    public void pickWord(WordBank bank) {
-        // currentWord = bank.chooseWord();
-        // if (currentWord != null) {
-        //     System.out.println(nickname + " has picked the word: " + currentWord);
-        // } else {
-        //     System.out.println("No words available to pick.");
-        // }
+    public boolean userVerfiy(ArrayList<User> nickList, String nickname){
+       for(User user : nickList){
+        if(user.getNickname() == nickname){
+            return false;
+        }
+       }
+        return true; 
     }
 
-
-    public int joinGame() {
-        return 0; 
-    }
-
-    public int getScore() {
-    
-        return currentPoints; 
-    }
-
-    // Getters and setters for nickname, hiScore, and currentPoints
     public String getNickname() {
         return nickname;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setNickname(ArrayList<User> nickList, String nickname) {
+        if(userVerfiy(nickList, nickname)){
+            this.nickname = nickname;  
+            this.id = nickList.size()+1; 
+        }
+    }
+    public int getScore() {
+        return score;
     }
 
-    public int getHiScore() {
-        return hiScore;
-    }
-
-    public void setHiScore(int hiScore) {
-        this.hiScore = hiScore;
-    }
-
-    public int getCurrentPoints() {
-        return currentPoints;
-    }
-
-    public void setCurrentPoints(int currentPoints) {
-        this.currentPoints = currentPoints;
+    public void setScore(int score) {
+        this.score = score;
     }
 }

@@ -104,13 +104,13 @@ public class App extends WebSocketServer {
       G.GameId = GameId;
       GameId++;
       // Add the first player
-      G.Players = uta.cse3310.PlayerType.player1;
+      G.Players = uta.cse3310.PlayerType.Red;
       ActiveGames.add(G);
       System.out.println(" creating a new Game");
     } else {
       // join an existing game
       System.out.println(" not a new game");
-      G.Players = uta.cse3310.PlayerType.player2;
+      G.Players = uta.cse3310.PlayerType.Pink;
       G.StartGame();
     }
     System.out.println("G.players is " + G.Players);

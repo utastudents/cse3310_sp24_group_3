@@ -4,30 +4,20 @@ import java.util.List;
 
 public class Game {
     private char[][] letterGrid;
-    private List<String> validWords;
     public PlayerType[] Button;
+    public PlayerType Players;
+    public Stats gameStats; 
+    private User user; 
     private int numPlayers;
     private int timer;
     private String message;
     private List<User> userList;
     public int GameId;
-    public PlayerType Players;
-    public Stats gameStats; 
-
+    private List<String> validWords;
     // Constructors
     Game(Stats stats) {
         
     }
-
-    // Initialize the grid with a default character
-    private void initializeGrid() {
-        for (int i = 0; i < letterGrid.length; i++) {
-            for (int j = 0; j < letterGrid[i].length; j++) {
-                letterGrid[i][j] = '-';
-            }
-        }
-    }
-
     // Start the game, ensuring minimum players are present
     public void StartGame() {
         if (numPlayers >= 2) {
@@ -38,12 +28,42 @@ public class Game {
         }
     }
 
+    public void Update(UserEvent U) {
+        System.out.println("The user event is " + U.PlayerIdx + "  " + U.Button);
+    }
+
+    private boolean CheckLine(int i, int j, int k, PlayerType player) {
+        return player == Button[i] && player == Button[j] && player == Button[k];
+    }
+
+    private boolean CheckHorizontal(PlayerType player) {
+        return CheckLine(0, 1, 2, player) | CheckLine(3, 4, 5, player) | CheckLine(6, 7, 8, player);
+    }
+
+    private boolean CheckVertical(PlayerType player) {
+        return CheckLine(0, 3, 6, player) | CheckLine(1, 4, 7, player) | CheckLine(2, 5, 8, player);
+    }
+
+    private boolean CheckDiagonal(PlayerType player) {
+        return CheckLine(0, 4, 8, player) | CheckLine(2, 4, 6, player);
+    }
+
+    private boolean CheckBoard(PlayerType player) {
+        return CheckHorizontal(player) | CheckVertical(player) | CheckDiagonal(player);
+    }
+
     // End the game and calculate results
     public int endGame() {
         message = "Game Over";
         return calculateScore();
     }
+    public List<String> validWords(){
+        for(User user : user.nickList)
+        {
 
+        }
+        return validWords;
+    }
     // Placeholder methods for word checking
     public boolean checkWinnerWord(String word) {
         // This could be expanded to check if the word is correctly placed and valid
@@ -77,38 +97,12 @@ public class Game {
         return letterGrid;
     }
 
-    public List<String> getValidWords() {
-        return validWords;
-    }
-
     public String message() {
         return message;
-    }
-    private boolean CheckLine(int i, int j, int k, PlayerType player) {
-        return player == Button[i] && player == Button[j] && player == Button[k];
-    }
-
-    private boolean CheckHorizontal(PlayerType player) {
-        return CheckLine(0, 1, 2, player) | CheckLine(3, 4, 5, player) | CheckLine(6, 7, 8, player);
-    }
-
-    private boolean CheckVertical(PlayerType player) {
-        return CheckLine(0, 3, 6, player) | CheckLine(1, 4, 7, player) | CheckLine(2, 5, 8, player);
-    }
-
-    private boolean CheckDiagonal(PlayerType player) {
-        return CheckLine(0, 4, 8, player) | CheckLine(2, 4, 6, player);
-    }
-
-    private boolean CheckBoard(PlayerType player) {
-        return CheckHorizontal(player) | CheckVertical(player) | CheckDiagonal(player);
     }
 
     public void clock(){
 
     }
 
-    public void Update(UserEvent U) {
-        System.out.println("The user event is " + U.PlayerIdx + "  " + U.Button);
-    }
 }

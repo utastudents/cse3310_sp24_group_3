@@ -9,12 +9,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class WordBank {
-    private char[][] grid;
     private int density;
-    
-    public char[][] make_grid(String[] wordlist) {
-        return new char[density][density];
-    }
 
     public void setDensity(int density) {
         this.density = density;
