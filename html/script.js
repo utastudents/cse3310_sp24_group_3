@@ -1,6 +1,11 @@
 const joinButton = document.getElementById('join-button');
 const gameLobby = document.getElementById('game-lobby');
 const gameUI = document.querySelector('.game-container');
+
+const nicknameInput = document.getElementById('nickname');
+const messageDisplay = document.getElementById('message-display');
+const chatMessage = document.getElementById('chat-message');
+const sendMessageButton = document.getElementById('send-message');
 // Create a connection to the server using WebSocket
 
 var connection = null;
@@ -17,40 +22,38 @@ connection.onclose = function (evt) {
   document.getElementById("bottomMessage").innerHTML = "Server Offline"
 }
 
-gameUI.style.display = 'none';
 joinButton.addEventListener('click', function() {
-        // Hide the game lobby
-    gameLobby.style.display = 'none';
-        // Show the game UI
-    gameUI.style.display = 'block';
+  const nickname = nicknameInput.value;
+  if (!nickname) {
+      alert('Please enter a nickname.');
+      return;
+  }
+  
+  // Hide the game lobby and show the game UI as before
+  gameLobby.style.display = 'none';
+  gameUI.style.display = 'block';
+
+  // Setup message sending
+  sendMessageButton.addEventListener('click', function() {
+      const message = chatMessage.value;
+      if (!message) {
+          alert('Please type a message.');
+          return;
+      }
+      const data = { nickname: nickname, message: message };
+      connection.send(JSON.stringify(data));
+      chatMessage.value = ''; // Clear the message input after sending
+  });
+
+  // Handle incoming messages
+  connection.onmessage = function(event) {
+      const incomingData = JSON.parse(event.data);
+      const displayMessage = document.createElement('div');
+      displayMessage.textContent = incomingData.nickname + ": " + incomingData.message;
+      messageDisplay.appendChild(displayMessage);
+  };
 });
 
-function createGrid() {
-  const gridContainer = document.getElementById('grid');
-  gridContainer.innerHTML = ''; // Clear existing grid if any
-  let number = 1; // Button identifier
-
-  for (let i = 0; i < 50; i++) {
-      for (let j = 0; j < 50; j++) {
-          const button = document.createElement('button');
-          button.id = 'button' + number;
-          button.textContent = ''; 
-          button.style.width = '20px'; 
-          button.style.height = '20px'; 
-          button.addEventListener('click', () => buttonClick(number));
-          gridContainer.appendChild(button);
-          number++;
-      }
-  }
-}
 
 
-function buttonClick(buttonId) {
-  const button = document.getElementById('button' + buttonId);
-  const U = { Button: buttonId, PlayerIdx: 'SomePlayer', GameId: 'SomeGameId' }; 
-  connection.send(JSON.stringify(U));
-  console.log('Sent:', JSON.stringify(U));
-
-  button.style.backgroundColor = 'red'; 
-}
 
