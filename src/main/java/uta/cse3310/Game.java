@@ -7,7 +7,7 @@ public class Game {
     private WordGrid grid;
     private int[][] answerGrid;
     private WordGrid answer;
-
+    public String[] Msg;
     public PlayerType[] Button;
     public PlayerType Players;
     public Stats gameStats; 
@@ -26,6 +26,10 @@ public class Game {
     }
     // Start the game, ensuring minimum players are present
     public void StartGame() {
+        for(User user : user.nickList)
+        {
+            Msg[0] = user.getNickname();  
+        }
 
     }
 
@@ -66,13 +70,13 @@ public class Game {
         message = "Game Over";
         return calculateScore();
     }
-    public List<String> validWords(){
-        for(User user : user.nickList)
-        {
+    // public List<String> validWords(){
+    //     for(User user : user.nickList)
+    //     {
 
-        }
-        return validWords;
-    }
+    //     }
+    //     return validWords;
+    // }
 
     // Method that checks if the user input matches a word in the answer grid.
     // Takes 2 end coordinates that the user selects.
