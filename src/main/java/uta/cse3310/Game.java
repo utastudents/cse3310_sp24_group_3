@@ -4,19 +4,21 @@ import java.util.List;
 
 public class Game {
     private char[][] letterGrid;
+    private WordGrid grid;
     private int[][] answerGrid;
+    private WordGrid answer;
 
     public PlayerType[] Button;
     public PlayerType Players;
     public Stats gameStats; 
     private User user; 
-    private int numPlayers;
-    private int timer;
+    // private int numPlayers;
+    // private int timer;
     private String message;
     private List<User> userList;
     public int GameId;
     private String[] validWords;
-    private wordGrid grid;
+
 
     // Constructors
     Game(Stats stats) {
@@ -37,7 +39,7 @@ public class Game {
     }
 
     /*      Methods not needed because they are replaced with checkWinnerWord()
-    
+
     private boolean CheckLine(int i, int j, int k, PlayerType player) {
         return player == Button[i] && player == Button[j] && player == Button[k];
     }
