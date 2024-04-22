@@ -1,4 +1,5 @@
 const joinButton = document.getElementById('join-button');
+const nicknameInput = document.getElementById('nickname');
 const gameLobby = document.getElementById('game-lobby');
 const gameUI = document.querySelector('.game-container');
 // Create a connection to the server using WebSocket
