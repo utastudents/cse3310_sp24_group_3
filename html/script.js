@@ -71,7 +71,7 @@ sendMessageButton.onclick = function() {
 function createGrid() {
   var rows = 35;
   var columns = 25;
-  const gridElement = document.getElementById('wordGrid');
+  const gridElement = document.getElementById('grid');
   for (let i = 0; i < rows; i++) {
       for (let j = 0; j < columns; j++) {
           const cellButton = document.createElement('button');
