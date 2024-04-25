@@ -40,6 +40,7 @@ joinButton.onclick = function() {
     console.log("Nickname:", nicknameInput.value);
     // Potentially send nickname to the server
     connection.send(JSON.stringify({ action: "join", nickname: nicknameInput.value }));
+    nicknameInput.value = "";
   } else {
     alert("Please enter a nickname.");
   }
