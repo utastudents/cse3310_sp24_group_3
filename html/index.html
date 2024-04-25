@@ -6,28 +6,29 @@
     <title>Word Search Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<label id="topMessage"></label>
 <body>
     <h1>Word Search Game</h1>
+    <label id="topMessage"></label> <!-- Moved inside body -->
     <div class="main-container">
         <div id="game-lobby">
             <div class="left-side">
-                <div id="join-game">
+                <!-- Wrapped buttons and input inside a form element -->
+                <form id="join-game">
                     <input type="text" id="nickname" placeholder="Enter Nickname">
-                    <button id="join-button">Join</button>
-                    <button id="2player-game">2 Player Game</button>
-                    <button id="4player-game">4 Player Game</button>
-                </div>
+                    <button type="button" id="join-button">Join</button>
+                    <button type="button" id="2player-game">2 Player Game</button>
+                    <button type="button" id="4player-game">4 Player Game</button>
+                </form>
                 <div id="game-chat">
                     <h1>Game Chat</h1>
                     <div id="message-display"></div>
                     <textarea id="chat-message" placeholder="Type Message"></textarea>
-                    <button id="send-message">Send</button>
+                    <button type="button" id="send-message">Send</button>
                 </div>
             </div>
             <div class="right-side">
                 <div id="leaderboard">
-                    <label id="topMessage"></label>
+                    <!-- Duplicate label removed -->
                 </div>
                 <div id="concurrent-games">
                 </div>
@@ -46,7 +47,7 @@
             </ul>
           </div>
         </div>
-      </div>
-<script src="script.js"></script>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
