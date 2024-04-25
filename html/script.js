@@ -27,14 +27,19 @@ connection.onclose = function (evt) {
 
 gameUI.style.display = 'none'; // Hide game UI initially
 
+connection.onmessage = function (evt) {
+  var msg;
+  msg = evt.data;
+  console.log("Message received: " + msg);
+  const obj = JSON.parse(msg);
+}
+
 // Event Listeners for buttons
 joinButton.onclick = function() {
   if (nicknameInput.value) {
     console.log("Nickname:", nicknameInput.value);
     // Potentially send nickname to the server
     connection.send(JSON.stringify({ action: "join", nickname: nicknameInput.value }));
-    gameLobby.style.display = 'none'; // Hide the lobby
-    gameUI.style.display = ''; // Show game UI
   } else {
     alert("Please enter a nickname.");
   }
@@ -43,11 +48,15 @@ joinButton.onclick = function() {
 twoPlayerGameButton.onclick = function() {
   console.log("Requesting 2-player game...");
   connection.send(JSON.stringify({ action: "startGame", players: 2 }));
+  gameLobby.style.display = 'none'; // Hide the lobby
+  gameUI.style.display = ''; // Show game 
 };
 
 fourPlayerGameButton.onclick = function() {
   console.log("Requesting 4-player game...");
   connection.send(JSON.stringify({ action: "startGame", players: 4 }));
+  gameLobby.style.display = 'none'; // Hide the lobby
+  gameUI.style.display = ''; // Show game UI
 };
 
 sendMessageButton.onclick = function() {
@@ -59,8 +68,16 @@ sendMessageButton.onclick = function() {
   }
 };
 
-// Additional functions related to gameplay might be added here
-function makeGrid() {
-  // Placeholder function to make game grid
-  console.log("Making game grid...");
+function createGrid() {
+  var rows = 35;
+  var columns = 25;
+  const gridElement = document.getElementById('wordGrid');
+  for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
+          const cellButton = document.createElement('button');
+          const randomChar = String.fromCharCode('A'.charCodeAt(0) + Math.floor(Math.random() * 26));
+          cellButton.textContent = randomChar;
+          gridElement.appendChild(cellButton);
+      }
+  }
 }
