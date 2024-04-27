@@ -35,7 +35,6 @@ public class App extends WebSocketServer {
   Vector<Game> ActiveGames = new Vector<Game>();
   Stats stats = new Stats();
   public ArrayList<User> nickNames = new ArrayList<User>();
-  private Map<WebSocket, User> connectionPlayerMap = new HashMap<>();
 
   int GameId = 1;
 
@@ -125,11 +124,7 @@ public class App extends WebSocketServer {
     JsonObject jsonMessage = JsonParser.parseString(message).getAsJsonObject();
     try {
         if (jsonMessage.has("nickname")) {
-            String nickname = jsonMessage.get("nickname").getAsString();
-            User newPlayer = new User(nickname);
-            connectionPlayerMap.put(conn, newPlayer);
-            JsonObject successMessage = new JsonObject();
-            conn.send(successMessage.toString());
+            
         }
     } catch (JsonSyntaxException e) {
         System.out.println("Error parsing JSON: " + e.getMessage());
@@ -177,26 +172,19 @@ public class App extends WebSocketServer {
 
   public static void main(String[] args) {
 
-    String HttpPort = System.getenv("HTTP_PORT");
-    int port = 9003;
-    if (HttpPort!=null) {
-      port = Integer.valueOf(HttpPort);
-    }
-
     // Set up the http server
+    //9003
+    //9080
+    int port = 9003;
     HttpServer H = new HttpServer(port, "./html");
     H.start();
-    System.out.println("http Server started on port: " + port);
+    System.out.println("http Server started on port:" + port);
 
     // create and start the websocket server
+    //9880
+    //9103
     port = 9103;
-    String WSPort = System.getenv("WEBSOCKET_PORT");
-    if (WSPort!=null) {
-      port = Integer.valueOf(WSPort);
-    }
-
     App A = new App(port);
-    A.setReuseAddr(true);
     A.start();
     System.out.println("websocket Server started on port: " + port);
 
