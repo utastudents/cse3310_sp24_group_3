@@ -8,12 +8,15 @@
 </head>
 <body>
     <h1>Word Search Game</h1>
+    <label id="topMessage"></label>
     <div class="main-container">
         <div id="game-lobby">
             <div class="left-side">
                 <!-- Wrapped buttons and input inside a form element -->
                 <form id="join-game">
-                    <input type="text" id="nickname" placeholder="Enter Nickname">
+                    <div id="nickname-container">
+                        <input type="text" id="nickname" placeholder="Enter Nickname">
+                    </div>
                     <button type="button" id="join-button">Join</button>
                     <button type="button" id="2player-game">2 Player Game</button>
                     <button type="button" id="4player-game">4 Player Game</button>
@@ -26,7 +29,10 @@
                 </div>
             </div>
             <div class="right-side">
-                <label id="topMessage"></label>
+                <h1>Lobby</h1>
+                <div>  <label id="leaderboard">
+                </label>       
+                </div>
                 <div id="concurrent-games">
                 </div>
             </div>

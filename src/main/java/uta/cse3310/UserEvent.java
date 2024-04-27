@@ -5,4 +5,5 @@ public class UserEvent {
     int GameId; // the game ID on the server
     PlayerType PlayerIdx; 
     int Button; 
+    String name; 
 }

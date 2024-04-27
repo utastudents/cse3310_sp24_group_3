@@ -7,10 +7,12 @@ const fourPlayerGameButton = document.getElementById('4player-game');
 const sendMessageButton = document.getElementById('send-message');
 const chatMessageInput = document.getElementById('chat-message');
 
+
 // Create a connection to the server using WebSocket
 var connection = null;
 
 // Establish WebSocket connection
+//9880
 var serverUrl = "ws://" + window.location.hostname + ":9103";
 connection = new WebSocket(serverUrl);
 
@@ -24,15 +26,20 @@ connection.onclose = function (evt) {
     document.getElementById("topMessage").innerHTML = "Server Offline";
   }
 };
-
-gameUI.style.display = 'none'; // Hide game UI initially
-
 connection.onmessage = function (evt) {
-  var msg;
-  msg = evt.data;
+  var msg = evt.data;
   console.log("Message received: " + msg);
   const obj = JSON.parse(msg);
+
+  // Handle different types of messages
+  if (obj.type === 'nicknameList') {
+    // Assuming the server sends a list of nicknames in an array
+    nicknames = obj.nicknames;
+    updateLeaderboard(nicknames); // Update the leaderboard with the new list
+  }
 }
+
+gameUI.style.display = 'none'; // Hide game UI initially
 
 // Event Listeners for buttons
 joinButton.onclick = function() {
@@ -70,7 +77,7 @@ sendMessageButton.onclick = function() {
 };
 
 function createGrid() {
-  var rows = 35;
+  var rows = 25;
   var columns = 25;
   const gridElement = document.getElementById('grid');
   for (let i = 0; i < rows; i++) {
@@ -82,3 +89,26 @@ function createGrid() {
       }
   }
 }
+function updateLeaderboard(nicknames) {
+  var leaderboardElement = document.getElementById("leaderboard");
+  leaderboardElement.innerHTML = "";
+  nicknames.forEach(function(nickname) {
+    var listItem = document.createElement("div");
+    listItem.textContent = nickname;
+    leaderboardElement.appendChild(listItem);
+  });
+}
+
+function displayWord()
+{
+
+}
+
+createGrid();
+// function buttonClicked()
+// {
+
+// }
+
+
+

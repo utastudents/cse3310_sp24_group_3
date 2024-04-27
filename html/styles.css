@@ -133,10 +133,20 @@
   }
   
   #grid {
-    display: grid;  
-    padding: 10px;
-    grid-gap: 5px; 
+    display: grid;
+    grid-template-columns: repeat(25, 1fr); /* Creates 25 columns */
+    gap: 2px; /* Sets a small gap between the buttons */
+    max-width: 100%; /* Ensures the grid does not overflow its container */
+  } 
+
+  #grid button {
+      width: 100%;
+      padding: 4px 2px; /* Adjust padding to your preference */
+      font-size: 0.8rem; /* Adjust font size to fit the buttons */
+      text-align: center;
+      aspect-ratio: 1; /* Keeps the buttons square */
   }
+
   
   #grid table {
     border-collapse: collapse;  

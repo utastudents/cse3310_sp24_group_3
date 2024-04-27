@@ -11,7 +11,7 @@ public class Game {
     public PlayerType[] Button;
     public PlayerType Players;
     public Stats gameStats; 
-    private User user; 
+    public User user; 
     // private int numPlayers;
     // private int timer;
     private String message;
@@ -26,10 +26,7 @@ public class Game {
     }
     // Start the game, ensuring minimum players are present
     public void StartGame() {
-        for(User user : user.nickList)
-        {
-            Msg[0] = user.getNickname();  
-        }
+        
     }
 
     public void gridCreation() {

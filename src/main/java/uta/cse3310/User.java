@@ -22,7 +22,13 @@ public class User {
        }
         return true; 
     }
+    public User(String nickname) {
+        this.nickname = nickname;
+    }
 
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
     public String getNickname() {
         return nickname;
     }
