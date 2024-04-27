@@ -177,19 +177,26 @@ public class App extends WebSocketServer {
 
   public static void main(String[] args) {
 
-    // Set up the http server
-    //9003
-    //9080
+    String HttpPort = System.getenv("HTTP_PORT");
     int port = 9003;
+    if (HttpPort!=null) {
+      port = Integer.valueOf(HttpPort);
+    }
+
+    // Set up the http server
     HttpServer H = new HttpServer(port, "./html");
     H.start();
-    System.out.println("http Server started on port:" + port);
+    System.out.println("http Server started on port: " + port);
 
     // create and start the websocket server
-    //9880
-    //9103
     port = 9103;
+    String WSPort = System.getenv("WEBSOCKET_PORT");
+    if (WSPort!=null) {
+      port = Integer.valueOf(WSPort);
+    }
+
     App A = new App(port);
+    A.setReuseAddr(true);
     A.start();
     System.out.println("websocket Server started on port: " + port);
 
