@@ -13,6 +13,7 @@ var connection = null;
 
 // Establish WebSocket connection
 //9880
+//9103
 var serverUrl = "ws://" + window.location.hostname + ":9103";
 connection = new WebSocket(serverUrl);
 
@@ -32,10 +33,14 @@ connection.onmessage = function (evt) {
   const obj = JSON.parse(msg);
 
   // Handle different types of messages
-  if (obj.type === 'nicknameList') {
-    // Assuming the server sends a list of nicknames in an array
-    nicknames = obj.nicknames;
-    updateLeaderboard(nicknames); // Update the leaderboard with the new list
+  if ('nicknameList' in obj) {
+    var name = obj.User;
+    document.getElementById("leaderboard").innerHTML = name.nickname;
+  }
+
+  if ('words' in obj) {
+    var words = obj.wordBank;
+    displayWordList(words); // Update the leaderboard with the new list
   }
 }
 
@@ -56,15 +61,11 @@ joinButton.onclick = function() {
 twoPlayerGameButton.onclick = function() {
   console.log("Requesting 2-player game...");
   connection.send(JSON.stringify({ action: "startGame", players: 2 }));
-  gameLobby.style.display = 'none'; // Hide the lobby
-  gameUI.style.display = ''; // Show game 
 };
 
 fourPlayerGameButton.onclick = function() {
   console.log("Requesting 4-player game...");
   connection.send(JSON.stringify({ action: "startGame", players: 4 }));
-  gameLobby.style.display = 'none'; // Hide the lobby
-  gameUI.style.display = ''; // Show game UI
 };
 
 sendMessageButton.onclick = function() {
@@ -89,6 +90,7 @@ function createGrid() {
       }
   }
 }
+
 function updateLeaderboard(nicknames) {
   var leaderboardElement = document.getElementById("leaderboard");
   leaderboardElement.innerHTML = "";
@@ -99,16 +101,47 @@ function updateLeaderboard(nicknames) {
   });
 }
 
-function displayWord()
+function displayWordList(words) {
+  const wordListElement = document.getElementById('word-list');
+  wordListElement.innerHTML = ""; 
+  words.forEach(function(word) {
+    const listItem = document.createElement('li');
+    listItem.textContent = word;
+    wordListElement.appendChild(listItem);
+  });
+}
+function twoPLayer()
+{
+  gameLobby.style.display = 'none'; // Hide the lobby
+  gameUI.style.display = ''; // Show game 
+  createGrid();
+
+}
+function fourPlayer()
+{
+  gameLobby.style.display = 'none'; // Hide the lobby
+  gameUI.style.display = ''; // Show game 
+  createGrid();
+}
+function wordBank()
 {
 
 }
 
-createGrid();
-// function buttonClicked()
-// {
-
+//fix
+// function buttonclick(i) {
+//   U = new UserEvent();
+//   U.Button = i;
+//   if (idx == 0)
+//       U.PlayerIdx = "XPLAYER";
+//   else
+//       U.PlayerIdx = "OPLAYER";
+//   U.GameId = gameid;
+//   connection.send(JSON.stringify(U));
+//   console.log(JSON.stringify(U))
 // }
+
+
 
 
 
