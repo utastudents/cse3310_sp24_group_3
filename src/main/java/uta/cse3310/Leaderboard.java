@@ -1,16 +1,55 @@
 package uta.cse3310;
 
-import java.util.List; 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 public class Leaderboard {
 
-    public int[] scores;
-    public String[] user;
+    private User[] users;
 
-    public User[] rankScore(User[] users) {
-        return users;
+    public Leaderboard(User[] users) {
+        this.users = users;
+        sortUsersByScore();
     }
-    
-    public int leaderboardEntries(List<Integer> scoreEntry) {
-        return 0;
+
+    private void sortUsersByScore() {
+        Arrays.sort(this.users, Comparator.comparingInt(User::getScore).reversed());
+    }
+
+    public User[] getUsers() {
+        return this.users;
+    }
+
+    public String displayLeaderboard() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Leaderboard:\n");
+        for (int i = 0; i < users.length; i++) {
+            sb.append(i + 1).append(". ").append(users[i].getName())
+              .append(" - Score: ").append(users[i].getScore()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    public int leaderboardEntries() {
+        return users.length;
+    }
+}
+
+class User {
+    private String name;
+    private int score;
+
+    public User(String name, int score) {
+        this.name = name;
+        this.score = score;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
     }
 }
