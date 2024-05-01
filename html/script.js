@@ -16,8 +16,11 @@ var serverUrl = "ws://" + window.location.hostname + ":9103";
 connection = new WebSocket(serverUrl);
 
 connection.onopen = function (evt) {
-  console.log("open");
+  console.log("Connection opened.");
+  // Optionally request the current list of nicknames
+  connection.send(JSON.stringify({ action: "requestCurrentPlayers" }));
 };
+
 
 connection.onclose = function (evt) {
   console.log("close");
@@ -31,15 +34,19 @@ connection.onmessage = function (evt) {
   console.log("Message received: " + msg);
   const obj = JSON.parse(msg);
 
-  if ('nicknameList' in obj) {
-    updateLeaderboard(obj.nicknameList); // Assume this method correctly updates the leaderboard with nicknames
+  if (obj.type === "currentPlayers") {
+      // Received the list of all current players
+      updateLeaderboard(obj.nicknames);
+  } else if (obj.type === "newPlayer") {
+      // Add new player to the list
+      const listItem = document.createElement('li');
+      listItem.textContent = obj.nickname;
+      nicknameList.appendChild(listItem);
+  } else if ('words' in obj) {
+      var words = obj.wordBank;
+      displayWordList(words); // Update the leaderboard with the new list
   }
-
-  if ('words' in obj) {
-    var words = obj.wordBank;
-    displayWordList(words);
-  }
-}
+};
 
 gameUI.style.display = 'none'; // Hide game UI initially
 
@@ -101,9 +108,9 @@ function createGrid(playerType) {
 function updateLeaderboard(nicknames) {
   nicknameList.innerHTML = ""; // Clear existing nicknames
   nicknames.forEach(function(nickname) {
-    var listItem = document.createElement('li');
-    listItem.textContent = nickname;
-    nicknameList.appendChild(listItem);
+      var listItem = document.createElement('li');
+      listItem.textContent = nickname;
+      nicknameList.appendChild(listItem);
   });
 }
 
