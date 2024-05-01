@@ -25,7 +25,7 @@ public class Leaderboard {
         StringBuilder sb = new StringBuilder();
         sb.append("Leaderboard:\n");
         for (int i = 0; i < users.length; i++) {
-            sb.append(i + 1).append(". ").append(users[i].getName())
+            sb.append(i + 1).append(". ").append(users[i].getNickname())
               .append(" - Score: ").append(users[i].getScore()).append("\n");
         }
         return sb.toString();
@@ -36,20 +36,4 @@ public class Leaderboard {
     }
 }
 
-class User {
-    private String name;
-    private int score;
 
-    public User(String name, int score) {
-        this.name = name;
-        this.score = score;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getScore() {
-        return score;
-    }
-}
