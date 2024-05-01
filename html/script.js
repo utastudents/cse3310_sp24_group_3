@@ -58,15 +58,18 @@ joinButton.onclick = function() {
   }
 };
 
-twoPlayerGameButton.onclick = function() {
+ttwoPlayerGameButton.onclick = function() {
   console.log("Requesting 2-player game...");
   connection.send(JSON.stringify({ action: "startGame", players: 2 }));
+  twoPlayer(); // Trigger the two-player game setup
 };
 
 fourPlayerGameButton.onclick = function() {
   console.log("Requesting 4-player game...");
   connection.send(JSON.stringify({ action: "startGame", players: 4 }));
+  fourPlayer(); // Trigger the four-player game setup
 };
+
 
 sendMessageButton.onclick = function() {
   if (chatMessageInput.value) {
@@ -77,19 +80,21 @@ sendMessageButton.onclick = function() {
   }
 };
 
-function createGrid() {
-  var rows = 25;
-  var columns = 25;
+function createGrid(playerType) {
+  var rows = playerType === 'twoPlayer' ? 15 : 25; // Smaller grid for two players
+  var columns = playerType === 'twoPlayer' ? 15 : 25; // Larger grid for four players
   const gridElement = document.getElementById('grid');
+  gridElement.innerHTML = ''; // Clear existing grid first
   for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < columns; j++) {
-          const cellButton = document.createElement('button');
-          const randomChar = String.fromCharCode('A'.charCodeAt(0) + Math.floor(Math.random() * 26));
-          cellButton.textContent = randomChar;
-          gridElement.appendChild(cellButton);
-      }
+    for (let j = 0; j < columns; j++) {
+      const cellButton = document.createElement('button');
+      const randomChar = String.fromCharCode('A'.charCodeAt(0) + Math.floor(Math.random() * 26));
+      cellButton.textContent = randomChar;
+      gridElement.appendChild(cellButton);
+    }
   }
 }
+
 
 function updateLeaderboard(nicknames) {
   var leaderboardElement = document.getElementById("leaderboard");
@@ -110,19 +115,20 @@ function displayWordList(words) {
     wordListElement.appendChild(listItem);
   });
 }
-function twoPLayer()
-{
+function twoPlayer() {
   gameLobby.style.display = 'none'; // Hide the lobby
-  gameUI.style.display = ''; // Show game 
-  createGrid();
+  gameUI.style.display = 'block'; // Show game UI
+  createGrid(); // Initialize the game grid for two players
+  console.log("Two-player game started."); // Optional: Log to console
+}
 
-}
-function fourPlayer()
-{
+function fourPlayer() {
   gameLobby.style.display = 'none'; // Hide the lobby
-  gameUI.style.display = ''; // Show game 
-  createGrid();
+  gameUI.style.display = 'block'; // Show game UI
+  createGrid(); // Initialize the game grid for four players
+  console.log("Four-player game started."); // Optional: Log to console
 }
+
 function wordBank()
 {
 
