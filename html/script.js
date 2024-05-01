@@ -6,14 +6,12 @@ const twoPlayerGameButton = document.getElementById('2player-game');
 const fourPlayerGameButton = document.getElementById('4player-game');
 const sendMessageButton = document.getElementById('send-message');
 const chatMessageInput = document.getElementById('chat-message');
-
+const nicknameList = document.getElementById('nickname-list'); // New reference to the nickname list
 
 // Create a connection to the server using WebSocket
 var connection = null;
 
 // Establish WebSocket connection
-//9880
-//9103
 var serverUrl = "ws://" + window.location.hostname + ":9103";
 connection = new WebSocket(serverUrl);
 
@@ -27,20 +25,19 @@ connection.onclose = function (evt) {
     document.getElementById("topMessage").innerHTML = "Server Offline";
   }
 };
+
 connection.onmessage = function (evt) {
   var msg = evt.data;
   console.log("Message received: " + msg);
   const obj = JSON.parse(msg);
 
-  // Handle different types of messages
   if ('nicknameList' in obj) {
-    var name = obj.User;
-    document.getElementById("leaderboard").innerHTML = name.nickname;
+    updateLeaderboard(obj.nicknameList); // Assume this method correctly updates the leaderboard with nicknames
   }
 
   if ('words' in obj) {
     var words = obj.wordBank;
-    displayWordList(words); // Update the leaderboard with the new list
+    displayWordList(words);
   }
 }
 
@@ -52,6 +49,13 @@ joinButton.onclick = function() {
     console.log("Nickname:", nicknameInput.value);
     // Potentially send nickname to the server
     connection.send(JSON.stringify({ action: "join", nickname: nicknameInput.value }));
+
+    // Add nickname to the lobby list directly
+    const listItem = document.createElement('li');
+    listItem.textContent = nicknameInput.value;
+    nicknameList.appendChild(listItem);
+
+    // Clear the input field after adding the nickname to the list
     nicknameInput.value = "";
   } else {
     alert("Please enter a nickname.");
@@ -70,7 +74,6 @@ fourPlayerGameButton.onclick = function() {
   fourPlayer(); // Trigger the four-player game setup
 };
 
-
 sendMessageButton.onclick = function() {
   if (chatMessageInput.value) {
     console.log("Sending message:", chatMessageInput.value);
@@ -81,8 +84,8 @@ sendMessageButton.onclick = function() {
 };
 
 function createGrid(playerType) {
-  var rows = playerType === 'twoPlayer' ? 15 : 25; // Smaller grid for two players
-  var columns = playerType === 'twoPlayer' ? 15 : 25; // Larger grid for four players
+  var rows = playerType === 'twoPlayer' ? 15 : 25;
+  var columns = playerType === 'twoPlayer' ? 15 : 25;
   const gridElement = document.getElementById('grid');
   gridElement.innerHTML = ''; // Clear existing grid first
   for (let i = 0; i < rows; i++) {
@@ -95,59 +98,35 @@ function createGrid(playerType) {
   }
 }
 
-
 function updateLeaderboard(nicknames) {
-  var leaderboardElement = document.getElementById("leaderboard");
-  leaderboardElement.innerHTML = "";
+  nicknameList.innerHTML = ""; // Clear existing nicknames
   nicknames.forEach(function(nickname) {
-    var listItem = document.createElement("div");
+    var listItem = document.createElement('li');
     listItem.textContent = nickname;
-    leaderboardElement.appendChild(listItem);
+    nicknameList.appendChild(listItem);
   });
 }
 
 function displayWordList(words) {
   const wordListElement = document.getElementById('word-list');
-  wordListElement.innerHTML = ""; 
+  wordListElement.innerHTML = "";
   words.forEach(function(word) {
     const listItem = document.createElement('li');
     listItem.textContent = word;
     wordListElement.appendChild(listItem);
   });
 }
+
 function twoPlayer() {
-  gameLobby.style.display = 'none'; // Hide the lobby
-  gameUI.style.display = 'block'; // Show game UI
-  createGrid('twoPlayer'); // Initialize the game grid for two players
-  console.log("Two-player game started."); // Optional: Log to console
+  gameLobby.style.display = 'none';
+  gameUI.style.display = 'block';
+  createGrid('twoPlayer');
+  console.log("Two-player game started.");
 }
 
 function fourPlayer() {
-  gameLobby.style.display = 'none'; // Hide the lobby
-  gameUI.style.display = 'block'; // Show game UI
-  createGrid('fourPlayer'); // Initialize the game grid for four players
-  console.log("Four-player game started."); // Optional: Log to console
+  gameLobby.style.display = 'none';
+  gameUI.style.display = 'block';
+  createGrid('fourPlayer');
+  console.log("Four-player game started.");
 }
-
-function wordBank()
-{
-
-}
-
-//fix
-// function buttonclick(i) {
-//   U = new UserEvent();
-//   U.Button = i;
-//   if (idx == 0)
-//       U.PlayerIdx = "XPLAYER";
-//   else
-//       U.PlayerIdx = "OPLAYER";
-//   U.GameId = gameid;
-//   connection.send(JSON.stringify(U));
-//   console.log(JSON.stringify(U))
-// }
-
-
-
-
-
