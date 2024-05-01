@@ -58,7 +58,7 @@ joinButton.onclick = function() {
   }
 };
 
-ttwoPlayerGameButton.onclick = function() {
+twoPlayerGameButton.onclick = function() {
   console.log("Requesting 2-player game...");
   connection.send(JSON.stringify({ action: "startGame", players: 2 }));
   twoPlayer(); // Trigger the two-player game setup
@@ -118,14 +118,14 @@ function displayWordList(words) {
 function twoPlayer() {
   gameLobby.style.display = 'none'; // Hide the lobby
   gameUI.style.display = 'block'; // Show game UI
-  createGrid(); // Initialize the game grid for two players
+  createGrid('twoPlayer'); // Initialize the game grid for two players
   console.log("Two-player game started."); // Optional: Log to console
 }
 
 function fourPlayer() {
   gameLobby.style.display = 'none'; // Hide the lobby
   gameUI.style.display = 'block'; // Show game UI
-  createGrid(); // Initialize the game grid for four players
+  createGrid('fourPlayer'); // Initialize the game grid for four players
   console.log("Four-player game started."); // Optional: Log to console
 }
 
